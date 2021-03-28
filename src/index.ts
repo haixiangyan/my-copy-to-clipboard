@@ -2,10 +2,9 @@ import copy from './lib/index'
 
 const $copy = document.querySelector<HTMLButtonElement>('#copy')
 const $myCopy = document.querySelector<HTMLButtonElement>('#my-copy')
-const $text = document.querySelector<HTMLParagraphElement>('#text')
 
 $copy.onclick = () => {
-  const copyText = $text.textContent
+  const copyText = document.querySelector<HTMLParagraphElement>('#text').innerText
 
   copy(copyText)
 }

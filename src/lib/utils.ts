@@ -28,7 +28,6 @@ export const deselectCurrent = () => {
   selection.removeAllRanges();
 
   return () => {
-    console.log($active)
     // 如果是插入符则移除 ranges
     if (selection.type === 'Caret') {
       selection.removeAllRanges()

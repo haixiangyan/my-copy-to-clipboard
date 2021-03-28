@@ -1,6 +1,19 @@
 import {deselectCurrent} from './utils'
 import {clipboardToIE11Formatting, Options} from './constants'
 
+const updateMarkStyles = (mark: HTMLSpanElement) => {
+  // 重置用户样式
+  mark.style.all = "unset";
+  // 放在 fixed，防止添加元素后触发滚动行为
+  mark.style.position = "fixed";
+  mark.style.top = '0';
+  mark.style.clip = "rect(0, 0, 0, 0)";
+  // 保留 space 和 line-break 特性
+  mark.style.whiteSpace = "pre";
+  // 外部有可能 user-select 为 'none'，因此这里设置为 text
+  mark.style.userSelect = "text";
+}
+
 const copy = (text: string, options: Options = {}) => {
   const {onCopy, format} = options
 
@@ -13,6 +26,7 @@ const copy = (text: string, options: Options = {}) => {
 
   const mark = document.createElement('span')
 
+  updateMarkStyles(mark)
   mark.textContent = text
 
   mark.addEventListener('copy', (e) => {

@@ -11,4 +11,3 @@ export const clipboardToIE11Formatting: Record<Format, IE11Format> = {
   "text/html": "Url",
   "default": "Text"
 }
-

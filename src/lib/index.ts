@@ -25,9 +25,9 @@ const copy = (text: string, options: Options = {}) => {
   const selection = document.getSelection()
 
   const mark = document.createElement('span')
+  mark.textContent = text
 
   updateMarkStyles(mark)
-  mark.textContent = text
 
   mark.addEventListener('copy', (e) => {
     e.stopPropagation();
@@ -48,7 +48,6 @@ const copy = (text: string, options: Options = {}) => {
     }
 
     if (onCopy) {
-      e.stopPropagation()
       e.preventDefault()
       onCopy(e.clipboardData)
     }
@@ -68,21 +67,27 @@ const copy = (text: string, options: Options = {}) => {
     if (!success) {
       throw new Error("Can't not copy")
     }
+    // 复制成功
+    success = true
   } catch (e) {
     try {
       // @ts-ignore window.clipboardData 这鬼玩意只有 IE 上有
       window.clipboardData.setData(format || 'text', text)
       // @ts-ignore window.clipboardData 这鬼玩意只有 IE 上有
       onCopy && onCopy(window.clipboardData)
+      // 复制成功
+      success = true
     } catch (e) {
       // 最后兜底方案，让用户在 window.prompt 的时候输入
-      window.prompt('输入需要复制的内容', text)
+      window.prompt('请手动复制以下内容', text)
     }
   } finally {
-    if (selection.removeRange) {
-      selection.removeRange(range)
-    } else {
-      selection.removeAllRanges()
+    if (selection) {
+      if (selection.removeRange) {
+        selection.removeRange(range)
+      } else {
+        selection.removeAllRanges()
+      }
     }
 
     if (mark) {

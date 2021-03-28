@@ -28,7 +28,6 @@ const copy = (text: string, options: Options = {}) => {
 
   // 选中
   range.selectNodeContents(mark)
-  selection.removeAllRanges()
   selection.addRange(range)
 
   const success = document.execCommand('copy')
@@ -36,6 +35,9 @@ const copy = (text: string, options: Options = {}) => {
   if (mark) {
     document.body.removeChild(mark)
   }
+
+  // 移除所有 ranges
+  selection.removeAllRanges()
 
   reselectPrevious()
 

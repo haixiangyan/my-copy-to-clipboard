@@ -10,14 +10,15 @@ const copy = (text: string) => {
 
   // 选中
   range.selectNodeContents(mark)
+  selection.removeAllRanges()
   selection.addRange(range)
 
   const success = document.execCommand('copy')
 
   if (success) {
-    alert('复制成功')
+    console.log('复制成功')
   } else {
-    alert('复制失败')
+    console.log('复制失败')
   }
 
   if (mark) {

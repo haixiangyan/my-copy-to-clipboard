@@ -1,9 +1,13 @@
+import {deselectCurrent} from './utils'
+
 interface Options {
   onCopy?: (copiedText: DataTransfer | null) => unknown
 }
 
 const copy = (text: string, options: Options = {}) => {
   const {onCopy} = options
+
+  const reselectPrevious = deselectCurrent()
 
   const range = document.createRange()
   const selection = document.getSelection()
@@ -32,6 +36,8 @@ const copy = (text: string, options: Options = {}) => {
   if (mark) {
     document.body.removeChild(mark)
   }
+
+  reselectPrevious()
 
   return success
 }

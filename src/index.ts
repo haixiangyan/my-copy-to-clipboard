@@ -6,5 +6,7 @@ const $text = document.querySelector<HTMLParagraphElement>('#text')
 $copy.onclick = () => {
   const copyText = $text.textContent
 
-  copy(copyText)
+  copy(copyText, {
+    onCopy: (data) => data.setData('text/plain', 'foo'),
+  })
 }

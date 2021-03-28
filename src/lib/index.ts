@@ -1,9 +1,23 @@
-const copy = (text: string) => {
+interface Options {
+  onCopy?: (copiedText: DataTransfer | null) => unknown
+}
+
+const copy = (text: string, options: Options = {}) => {
+  const {onCopy} = options
+
   const range = document.createRange()
   const selection = document.getSelection()
 
   const mark = document.createElement('span')
   mark.textContent = text
+
+  mark.addEventListener('copy', (e) => {
+    if (onCopy) {
+      e.stopPropagation()
+      e.preventDefault()
+      onCopy(e.clipboardData)
+    }
+  })
 
   // 插入 body 中
   document.body.appendChild(mark)
@@ -15,15 +29,11 @@ const copy = (text: string) => {
 
   const success = document.execCommand('copy')
 
-  if (success) {
-    console.log('复制成功')
-  } else {
-    console.log('复制失败')
-  }
-
   if (mark) {
     document.body.removeChild(mark)
   }
+
+  return success
 }
 
 export default copy

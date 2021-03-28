@@ -1,18 +1,5 @@
 import {deselectCurrent} from './utils'
-
-type Format = 'text/plain' | 'text/html' | 'default'
-type IE11Format = 'Text' | 'Url'
-
-interface Options {
-  onCopy?: (copiedText: DataTransfer | null) => unknown
-  format?: Format
-}
-
-const clipboardToIE11Formatting: Record<Format, IE11Format> = {
-  "text/plain": "Text",
-  "text/html": "Url",
-  "default": "Text"
-}
+import {clipboardToIE11Formatting, Options} from './constants'
 
 const copy = (text: string, options: Options = {}) => {
   const {onCopy, format} = options

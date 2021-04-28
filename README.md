@@ -2,8 +2,10 @@
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2071eedc881f466fa60196d8c0b3c969~tplv-k3u1fbpfcp-zoom-1.image)
 
-> 项目代码：https://github.com/Haixiang6123/my-copy-to-clipboard
-> 预览地址：[http://yanhaixiang.com/my-copy-to-clipboard/](http://yanhaixiang.com/my-copy-to-clipboard/)
+> 文章代码：https://github.com/Haixiang6123/my-copy-to-clipboard
+> 
+> 预览地址：http://yanhaixiang.com/my-copy-to-clipboard/
+> 
 > 参考轮子：https://www.npmjs.com/package/copy-to-clipboard
 
 用 JS 来复制文本在网页应用里十分常见，比如 github 里复制 remote 地址的功能：
